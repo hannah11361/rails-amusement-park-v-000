@@ -7,6 +7,13 @@
     <%= csrf_meta_tags %>
     <%= analytics_init if Rails.env.production? %>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+
+    <% if flash[:notice] %>
+    <div class="notice"><p><%= flash[:notice] %></p></div>
+
+    <% end %>
+
+
   </head>
   <body>
     <!--  navbar -->
@@ -24,6 +31,13 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
            <!--  nav here -->
+           <% if current_user %>
+              <li><%= link_to "Attractions", attractions_path %></li>
+              <li><%= link_to "Log Out", signout_path, method: :delete %></li>
+           <% else %>
+              <li><%= link_to "Sign Up", new_user_path %></li>
+              <li><%= link_to "Sign In", signin_path %></li>
+           <% end %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
